@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package lmifeedr;
+
+service LMIFeedr {
+  rpc GetComputer(ComputerRequest) returns (Computer) {}
+  rpc GetComputers(ComputerRequest) returns (stream Computer) {}
+  rpc Watch(WatchRequest) returns (stream Computer) {}
+}
+
+message Computer {
+  uint64 hostID = 1;
+  uint64 old_hostID = 11;
+  string name = 2;
+  string old_name = 12;
+  string ip = 3;
+  string old_ip = 13;
+  int32 status = 4;
+  int32 old_status = 14;
+  uint32 change_set = 20;
+}
+
+message ComputerRequest {
+  uint64 hostID = 1;
+  string nameMatch = 2;
+  string ipMatch = 3;
+}
+
+message WatchRequest {
+  repeated uint64 hostID = 1;
+  repeated string nameMatch = 2;
+  repeated string ipMatch = 3;
+}
