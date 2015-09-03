@@ -82,8 +82,6 @@ func (svr *lmiServer) processComputer(computer *logmein.Computer) {
 	svr.RLock()
 	defer svr.RUnlock()
 
-	fmt.Printf("PC:[%+v]\n", computer)
-
 	// receivedThisComputer map should help prevent duplicate computers from crossing the wire
 	receivedThisComputer := make(map[chan<- *logmein.Computer]bool)
 
