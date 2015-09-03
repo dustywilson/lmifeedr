@@ -342,6 +342,9 @@ func (svr *lmiServer) GetComputers(req *lmifeedr.ComputerRequest, stream lmifeed
 			}
 		}
 	}
+	if len(returned) > 0 {
+		return nil
+	}
 	return ErrNoMatch
 }
 
