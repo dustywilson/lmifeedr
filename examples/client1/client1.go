@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -11,10 +12,13 @@ import (
 	"google.golang.org/grpc"
 )
 
+var serverAddr = flag.String("s", "127.0.0.1:23232", "Server address and port")
+
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
+	flag.Parse()
 
-	conn, err := grpc.Dial("127.0.0.1:23232", grpc.WithInsecure())
+	conn, err := grpc.Dial(*serverAddr, grpc.WithInsecure())
 	if err != nil {
 		log.Println(err)
 		os.Exit(1)
